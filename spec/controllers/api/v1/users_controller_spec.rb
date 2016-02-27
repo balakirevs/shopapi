@@ -41,8 +41,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
     context "when is not created" do
       before(:each) do
-        @invalid_user_attributes = { password: "12345678",
-                                     password_confirmation: "12345678" }
+        @invalid_user_attributes = { password: "12345678", password_confirmation: "12345678" }
         post :create, { user: @invalid_user_attributes }, format: :json
       end
 
@@ -106,7 +105,5 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 	  end
 
 	  it { should respond_with 204 }
-
 	end
-
 end

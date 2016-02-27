@@ -43,7 +43,6 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
       end
 
       it_behaves_like "paginated list"
-
       it { should respond_with 200 }
     end
 
@@ -111,8 +110,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
 
     context "when is successfully updated" do
       before(:each) do
-        patch :update, { user_id: @user.id, id: @product.id,
-              product: { title: "An expensive TV" } }
+        patch :update, { user_id: @user.id, id: @product.id, product: { title: "An expensive TV" } }
       end
 
       it "renders the json representation for the updated user" do
@@ -125,8 +123,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
 
     context "when is not updated" do
       before(:each) do
-        patch :update, { user_id: @user.id, id: @product.id,
-              product: { price: "two hundred" } }
+        patch :update, { user_id: @user.id, id: @product.id, product: { price: "two hundred" } }
       end
 
       it "renders an errors json" do

@@ -25,7 +25,6 @@ RSpec.describe Product, type: :model do
       @product2 = FactoryGirl.create :product, title: "Fastest Laptop"
       @product3 = FactoryGirl.create :product, title: "CD player"
       @product4 = FactoryGirl.create :product, title: "LCD TV"
-
     end
 
     context "when a 'TV' title pattern is sent" do

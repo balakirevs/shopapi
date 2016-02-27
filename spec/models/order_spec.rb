@@ -7,9 +7,7 @@ RSpec.describe Order, type: :model do
 
 	  it { should respond_to(:total) }
 	  it { should respond_to(:user_id) }
-
 	  it { should validate_presence_of :user_id }
-
 	  it { should belong_to :user }
 	  it { should have_many(:placements) }
   	it { should have_many(:products).through(:placements) }
@@ -19,12 +17,9 @@ RSpec.describe Order, type: :model do
     before(:each) do
       product_1 = FactoryGirl.create :product, price: 100
       product_2 = FactoryGirl.create :product, price: 85
-
       placement_1 = FactoryGirl.build :placement, product: product_1, quantity: 3
       placement_2 = FactoryGirl.build :placement, product: product_2, quantity: 15
-
       @order = FactoryGirl.build :order
-
       @order.placements << placement_1
       @order.placements << placement_2
     end
@@ -38,9 +33,7 @@ RSpec.describe Order, type: :model do
     before(:each) do
       product_1 = FactoryGirl.create :product, price: 100, quantity: 5
       product_2 = FactoryGirl.create :product, price: 85, quantity: 10
-
       @order = FactoryGirl.build :order
-
       @product_ids_and_quantities = [[product_1.id, 2], [product_2.id, 3]]
     end
 
@@ -53,13 +46,9 @@ RSpec.describe Order, type: :model do
     before do
       product_1 = FactoryGirl.create :product, price: 100, quantity: 5
       product_2 = FactoryGirl.create :product, price: 85, quantity: 10
-
-
       placement_1 = FactoryGirl.build :placement, product: product_1, quantity: 3
       placement_2 = FactoryGirl.build :placement, product: product_2, quantity: 15
-
       @order = FactoryGirl.build :order
-
       @order.placements << placement_1
       @order.placements << placement_2
     end
