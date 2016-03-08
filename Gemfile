@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5.2'
-group :development do
-  gem 'sqlite3'
-end
+gem 'rails', '4.2.6'
+
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
@@ -12,6 +10,15 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'sdoc'
 gem 'active_model_serializers', git: 'git@github.com:rails-api/active_model_serializers.git', branch: '0-8-stable'
+gem 'devise'
+gem 'sabisu_rails', github: 'IcaliaLabs/sabisu-rails'
+gem 'compass-rails'
+gem 'furatto'
+gem 'font-awesome-rails'
+gem 'simple_form'
+gem 'kaminari'
+gem 'delayed_job_active_record'
+gem 'brakeman', :require => false
 
 group :development, :test do
   gem 'factory_girl_rails'
@@ -32,14 +39,5 @@ end
 group :development do
   gem 'web-console'
   gem 'spring'
+  gem 'sqlite3'
 end
-
-gem 'devise'
-gem 'sabisu_rails', github: 'IcaliaLabs/sabisu-rails'
-gem 'compass-rails'
-gem 'furatto'
-gem 'font-awesome-rails'
-gem 'simple_form'
-gem 'kaminari'
-gem 'delayed_job_active_record'
-gem 'brakeman', :require => false
