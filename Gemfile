@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7.1'
+gem 'rails', '4.2.8'
 
 gem 'sass-rails'
 gem 'uglifier'
@@ -19,6 +19,7 @@ gem 'simple_form'
 gem 'kaminari'
 gem 'delayed_job_active_record'
 gem 'brakeman', :require => false
+gem 'rubocop', require: false
 
 group :development, :test do
   gem 'factory_girl_rails'
