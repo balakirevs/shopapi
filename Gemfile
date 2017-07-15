@@ -20,6 +20,7 @@ gem 'kaminari'
 gem 'delayed_job_active_record'
 gem 'brakeman', :require => false
 gem 'rubocop', require: false
+gem 'hamlit'
 
 group :development, :test do
   gem 'factory_girl_rails'

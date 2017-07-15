@@ -1,0 +1,9 @@
+%h1
+  Order: ##{@order.id}
+%p
+  You ordered #{@order.products.count} products:
+%ul
+  - @order.products.each do |product|
+    %li
+      = product.title
+      \- #{number_to_currency product.price}
