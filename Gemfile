@@ -27,6 +27,8 @@ group :development, :test do
   gem 'ffaker'
   gem 'byebug'
   gem 'pry'
+  gem 'parallel_tests'
+  gem 'zeus-parallel_tests'
 end
 
 group :test do
@@ -36,6 +38,7 @@ group :test do
   gem 'email_spec'
   gem 'guard'
   gem 'guard-rspec', require: false
+  gem 'zeus'
 end
 
 group :development do

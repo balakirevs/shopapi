@@ -11,3 +11,10 @@ $ bundle exec rake db:migrate
 $ bundle exec rspec spec
 $ brakeman
 ```
+## To run parallel tests
+```
+$ bundle exec rake parallel:create
+$ bundle exec rake parallel:prepare
+$ bundle exec zeus start
+$ bundle exec zeus parallel_rspec spec
+```

@@ -189,6 +189,8 @@ GEM
       shellany (~> 0.0)
     orm_adapter (0.5.0)
     parallel (1.11.2)
+    parallel_tests (2.14.2)
+      parallel
     parser (2.4.0.0)
       ast (~> 2.2)
     powerpack (0.1.1)
@@ -311,6 +313,11 @@ GEM
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
+    zeus (0.15.14)
+      method_source (>= 0.6.7)
+    zeus-parallel_tests (0.3.2)
+      parallel_tests (>= 0.11.3)
+      zeus (>= 0.13.0)
 
 PLATFORMS
   ruby
@@ -334,6 +341,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   kaminari
+  parallel_tests
   pry
   rails (= 4.2.9)
   rspec-collection_matchers
@@ -349,6 +357,8 @@ DEPENDENCIES
   turbolinks
   uglifier
   web-console
+  zeus
+  zeus-parallel_tests
 
 BUNDLED WITH
    1.15.1
