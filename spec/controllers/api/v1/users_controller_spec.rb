@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :controller do
 
-  before(:each) { request.headers['Accept'] = "application/vnd.shop.v1" }
-
   describe "GET #show" do
     before(:each) do
       @user = FactoryGirl.create :user
@@ -62,7 +60,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   describe "PUT/PATCH #update" do
     before(:each) do
       @user = FactoryGirl.create :user
-      api_authorization_header @user.auth_token 
+      api_authorization_header @user.auth_token
     end
 
     context "when is successfully updated" do
