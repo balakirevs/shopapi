@@ -25,6 +25,7 @@ $ curl get.pow.cx | sh
 $ cd ~/.pow
 $ ln -s ~/workspace/shop_api
 navigate to http://api.shop_api.dev
+the credentials to access are admin for the username and sekret for the password
 ```
 
 ## To check endpoints
