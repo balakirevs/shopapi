@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
 		it { should validate_uniqueness_of(:email).case_insensitive }
 		it { should validate_confirmation_of(:password) }
 		it { should allow_value('example@domain.com').for(:email) }
-		it { should validate_uniqueness_of(:email).case_insensitive }
+		it { should validate_uniqueness_of(:auth_token).ignoring_case_sensitivity }
 		it { should have_many(:products) }
 		it { should have_many(:orders) }
 		it { should have_many(:products) }
@@ -48,6 +48,6 @@ RSpec.describe User, type: :model do
 	        expect(Product.find(product)).to raise_error ActiveRecord::RecordNotFound
 	      end
 	    end
-	  end  
+	  end
 	end
 end
