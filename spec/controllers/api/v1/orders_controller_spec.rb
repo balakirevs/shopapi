@@ -58,7 +58,13 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
 	  it "returns the just user order record" do
 	    order_response = json_response[:order]
 	    expect(order_response[:id]).to be_present
-	  end
+    end
+
+		it 'embeds the two product objects related to the order' do
+			order_response = json_response[:order]
+			expect(order_response[:products].size).to eql(2)
+    end
+
 	  it { should respond_with 201 }
 	end
 end
