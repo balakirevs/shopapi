@@ -1,4 +1,14 @@
-guard :rspec, all_on_start: false, all_after_pass: false, zeus: true, parallel: true, bundler: false, cmd: 'bundle exec rspec' do
+rspec_options = {
+  results_file: 'tmp/guard_rspec_results.txt', # << add this option to match above path in custom_plan.rb
+  all_on_start: false,
+  all_after_pass: false,
+  zeus: true,
+  parallel: true,
+  bundler: false,
+  cmd: 'bundle exec rspec'
+}
+
+guard :rspec, rspec_options do
   watch('spec/spec_helper.rb')                        { 'spec' }
   watch('config/routes.rb')                           { 'spec/routing' }
   watch('app/controllers/application_controller.rb')  { 'spec/controllers' }

@@ -1,12 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-	cached
-
-  embed :ids
-  attributes :id, :email, :created_at, :updated_at, :auth_token
-
+  cache key: 'user', expires_in: 30.minutes
+  attributes :id, :email, :created_at, :updated_at, :auth_token, :product_ids
   has_many :products
-
-  def cache_key
-    [object, scope]
-  end
 end

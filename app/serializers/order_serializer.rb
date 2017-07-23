@@ -1,10 +1,5 @@
 class OrderSerializer < ActiveModel::Serializer
-  cached
-
+  cache key: 'order', expires_in: 30.minutes
   attributes :id, :total
   has_many :products, serializer: OrderProductSerializer
-
-  def cache_key
-    [object, scope]
-  end
 end

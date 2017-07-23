@@ -1,48 +1,49 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.9'
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
 
-gem 'sass-rails'
-gem 'uglifier'
-gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder'
-gem 'sdoc'
-gem 'active_model_serializers', git: 'git@github.com:rails-api/active_model_serializers.git', branch: '0-8-stable'
+gem 'rails', '~> 5.1.2'
+gem 'sqlite3'
+gem 'puma', '~> 3.7'
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.2'
+gem 'turbolinks', '~> 5'
+gem 'jbuilder', '~> 2.5'
+gem 'active_model_serializers', '~> 0.10.0'
 gem 'devise'
-gem 'sabisu_rails', github: 'IcaliaLabs/sabisu-rails'
-gem 'compass-rails', '~> 2.0.2'
-gem 'furatto'
-gem 'font-awesome-rails'
-gem 'simple_form'
+gem 'hamlit'
 gem 'kaminari'
 gem 'delayed_job_active_record'
-gem 'brakeman', :require => false
+gem 'brakeman', require: false
 gem 'rubocop', require: false
-gem 'hamlit'
 
 group :development, :test do
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_girl_rails'
   gem 'ffaker'
-  gem 'byebug'
-  gem 'pry'
   gem 'parallel_tests'
   gem 'zeus-parallel_tests'
+end
+
+group :development do
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'rspec-collection_matchers'
   gem 'email_spec'
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'zeus'
+  gem 'simplecov', require: false
 end
 
-group :development do
-  gem 'web-console'
-  gem 'spring'
-  gem 'sqlite3'
-end
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

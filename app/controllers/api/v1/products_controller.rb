@@ -1,8 +1,8 @@
 class Api::V1::ProductsController < ApplicationController
-	before_action :authenticate_with_token!, only: [:create, :update, :destroy]
-	respond_to :json
+  respond_to :json
+  before_action :authenticate_with_token!, only: [:create]
 
-	def index
+  def index
     products = Product.search(params).page(params[:page]).per(params[:per_page])
     render json: products, meta: pagination(products, params[:per_page])
   end
@@ -37,7 +37,7 @@ class Api::V1::ProductsController < ApplicationController
 
   private
 
-    def product_params
-      params.require(:product).permit(:title, :price, :published)
-    end
+  def product_params
+    params.require(:product).permit(:title, :price, :published)
+  end
 end
