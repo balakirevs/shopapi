@@ -23,13 +23,13 @@ $ bundle exec zeus parallel_rspec spec
 ```
 $ curl get.pow.cx | sh
 $ cd ~/.pow
-$ ln -s ~/workspace/shop_api
-navigate to http://api.shop_api.dev
+$ ln -s ~/workspace/shopapi
+navigate to http://api.shopapi.dev
 the credentials to access are admin for the username and sekret for the password
 ```
 
 ## To check endpoints
 ```
-$ curl -H 'Accept: application/vnd.shop_api.v1' http://api.shop_api.dev/users/1 
+$ curl -H 'Accept: application/vnd.shopapi.v1' http://api.shopapi.dev/users/1 
 navigate to http://shopapi.dev/sabisu_rails/explorer
 ```
