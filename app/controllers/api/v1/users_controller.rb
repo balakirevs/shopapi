@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authenticate_with_token!, only: [:update, :destroy]
-	respond_to :json
+  respond_to :json
 
   def show
     respond_with User.find(params[:id])
@@ -25,14 +25,14 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-	def destroy
+  def destroy
     current_user.destroy
     head 204
   end
 
   private
 
-    def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation)
+  end
 end

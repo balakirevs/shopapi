@@ -8,10 +8,10 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   def show
-  	respond_with current_user.orders.find(params[:id])
-	end
+    respond_with current_user.orders.find(params[:id])
+  end
 
-	def create
+  def create
     order = current_user.orders.build
     order.build_placements_with_product_ids_and_quantities(params[:order][:product_ids_and_quantities])
 
