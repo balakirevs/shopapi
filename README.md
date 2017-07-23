@@ -4,8 +4,8 @@
 
 ```
 $ cd ~/workspace
-$ git clone https://github.com/balakirevs/shop_api.git
-$ cd shop_api
+$ git clone https://github.com/balakirevs/shopapi.git
+$ cd shopapi
 $ bundle install
 $ bundle exec rails db:setup
 $ bundle exec rspec spec
