@@ -21,8 +21,8 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
-  config.include Request::JsonHelpers, type: :controller
-  config.include Request::HeadersHelpers, type: :controller
+  config.include Request::JsonHelpers
+  config.include Request::HeadersHelpers
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
   config.include(EmailSpec::Helpers)

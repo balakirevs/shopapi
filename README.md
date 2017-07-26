@@ -29,5 +29,5 @@ navigate to http://api.shop_api.dev
 
 ## To check endpoints
 ```
-$ curl -H 'Accept: application/vnd.shop_api.v1' http://api.shop_api.dev/users/1 
+$ curl -H 'Accept: application/vnd.shopapi.v1' http://api.shopapi.dev/v1/users/1 
 ```

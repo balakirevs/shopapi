@@ -14,7 +14,7 @@ class Api::V1::ProductsController < ApplicationController
   def create
     product = current_user.products.build(product_params)
     if product.save
-      render json: product, status: 201, location: [:api, product]
+      render json: product, status: 201, location: [:api, :v1, product]
     else
       render json: { errors: product.errors }, status: 422
     end
@@ -23,7 +23,7 @@ class Api::V1::ProductsController < ApplicationController
   def update
     product = current_user.products.find(params[:id])
     if product.update(product_params)
-      render json: product, status: 200, location: [:api, product]
+      render json: product, status: 200, location: [:api, :v1, product]
     else
       render json: { errors: product.errors }, status: 422
     end

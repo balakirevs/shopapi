@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
     it { should validate_uniqueness_of(:email).ignoring_case_sensitivity }
     it { should validate_confirmation_of(:password) }
     it { should allow_value('example@domain.com').for(:email) }
-    it { should validate_uniqueness_of(:auth_token)}
+    it { should validate_uniqueness_of(:auth_token) }
   end
 
   describe 'relation' do
@@ -31,8 +31,8 @@ RSpec.describe User, type: :model do
     it { should_not be_valid }
   end
 
-  describe "#generate_authentication_token!" do
-    it "generates a unique token" do
+  describe '#generate_authentication_token!' do
+    it 'generates a unique token' do
       user
       allow(Devise).to receive(:friendly_token).and_return('authentication_unique_token')
       user.generate_authentication_token!
@@ -47,7 +47,6 @@ RSpec.describe User, type: :model do
   end
 
   describe '#product assosiations' do
-
     before do
       user.save
       3.times { create(:product, user: user) }
