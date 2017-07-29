@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::ProductsController, type: :controller do
-
   let(:user)    { create(:user) }
   let(:product) { create(:product, user: user) }
+  before(:each) { api_authorization_header user.auth_token }
 
   describe 'GET #index' do
     before(:each) do
@@ -11,18 +11,14 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
       get :index
     end
 
-    context 'when is not receiving any product_ids parameter' do
-      before(:each) do
-        get :index
-      end
+    let(:products_response) { json_response[:products] }
 
+    context 'when is not receiving any product_ids parameter' do
       it 'returns 4 records from the database' do
-        products_response = json_response[:products]
         expect(products_response.size).to eql(4)
       end
 
       it 'returns the user object into each product' do
-        products_response = json_response[:products]
         products_response.each do |product_response|
           expect(product_response[:user]).to be_present
         end
@@ -34,12 +30,9 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
     end
 
     context 'when product_ids parameter is sent' do
-      before(:each) do
-        get :index, params: { product_ids: user.product_ids }
-      end
+      before(:each) { get :index, params: { product_ids: user.product_ids } }
 
       it 'returns just the products that belong to the user' do
-        products_response = json_response[:products]
         products_response.each do |product_response|
           expect(product_response[:user][:email]).to eql user.email
         end
@@ -48,23 +41,19 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
   end
 
   describe 'GET #show' do
-    before(:each) do
-      get :show, params: { id: product.id }
-    end
+    before(:each) { get :show, params: { id: product.id } }
+    let(:product_response) { json_response[:product] }
 
     it 'returns the information about a reporter on a hash' do
-      product_response = json_response[:product][:title]
-      expect(product_response).to eql product.title
+      expect(product_response[:title]).to eql product.title
     end
 
     it 'has the user as a embeded object' do
-      product_response = json_response[:product][:user][:email]
-      expect(product_response).to eql product.user.email
+      expect(product_response[:user][:email]).to eql product.user.email
     end
 
-    it 'has the user as a embeded object' do
-      product_response = json_response[:product][:user][:email]
-      expect(product_response).to eql product.user.email
+    it "should not reveal the user's token" do
+      expect(product_response[:user][:token]).to be_falsey
     end
 
     it { should respond_with 200 }
@@ -74,13 +63,13 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
     context 'when is successfully created' do
       before(:each) do
         @product_attributes = attributes_for :product
-        api_authorization_header user.auth_token
         post :create, params: { user_id: user.id, product: @product_attributes }
       end
 
+      let(:product_response) { json_response[:product] }
+
       it 'renders the json representation for the product record just created' do
-        product_response = json_response[:product][:title]
-        expect(product_response).to eql @product_attributes[:title]
+        expect(product_response[:title]).to eql @product_attributes[:title]
       end
 
       it { should respond_with 201 }
@@ -88,19 +77,19 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
 
     context 'when is not created' do
       before(:each) do
-        @invalid_product_attributes = { title: 'Smart TV', price: 'Twelve dollars' }
-        api_authorization_header user.auth_token
+        @invalid_product_attributes = { title: '', price: 'Twelve dollars' }
         post :create, params: { user_id: user.id, product: @invalid_product_attributes }
       end
 
+      let(:product_response) { json_response }
+
       it 'renders an errors json' do
-        product_response = json_response
         expect(product_response).to have_key(:errors)
       end
 
-      it 'renders the json errors on whye the user could not be created' do
-        product_response = json_response[:errors][:price]
-        expect(product_response).to include 'is not a number'
+      it 'renders the json errors on why the user could not be created' do
+        expect(product_response[:errors][:price]).to include 'is not a number'
+        expect(product_response[:errors][:title]).to include "can't be blank"
       end
 
       it { should respond_with 422 }
@@ -108,36 +97,27 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
   end
 
   describe 'PUT/PATCH #update' do
-    before(:each) do
-      api_authorization_header user.auth_token
-    end
-
     context 'when is successfully updated' do
-      before(:each) do
-        patch :update, params: { user_id: user.id, id: product.id, product: { title: 'An expensive TV' } }
-      end
+      before(:each) { patch :update, params: { user_id: user.id, id: product.id, product: { title: 'An expensive TV' } } }
+      let(:product_response) { json_response[:product] }
 
-      it 'renders the json representation for the updated user' do
-        product_response = json_response[:product][:title]
-        expect(product_response).to eql 'An expensive TV'
+      it 'renders the json representation for the updated product' do
+        expect(product_response[:title]).to eql 'An expensive TV'
       end
 
       it { should respond_with 200 }
     end
 
     context 'when is not updated' do
-      before(:each) do
-        patch :update, params: { user_id: user.id, id: product.id, product: { price: 'two hundred' } }
-      end
+      before(:each) { patch :update, params: { user_id: user.id, id: product.id, product: { price: '' } } }
+      let(:product_response) { json_response }
 
       it 'renders an errors json' do
-        product_response = json_response
         expect(product_response).to have_key(:errors)
       end
 
-      it 'renders the json errors on whye the user could not be created' do
-        product_response = json_response[:errors][:price]
-        expect(product_response).to include 'is not a number'
+      it 'renders the json errors on why the product could not be updated' do
+        expect(product_response[:errors][:price]).to include 'is not a number'
       end
 
       it { should respond_with 422 }
@@ -145,10 +125,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    before(:each) do
-      api_authorization_header user.auth_token
-      delete :destroy, params: { user_id: user.id, id: product.id }
-    end
+    before(:each) { delete :destroy, params: { user_id: user.id, id: product.id } }
 
     it { should respond_with 204 }
   end
