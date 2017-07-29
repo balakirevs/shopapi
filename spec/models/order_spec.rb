@@ -40,9 +40,7 @@ RSpec.describe Order, type: :model do
     let(:product_2) { create(:product, price: 85, quantity: 10) }
     let(:order)     { create(:order) }
 
-    before(:each) do
-      @product_ids_and_quantities = [[product_1.id, 2], [product_2.id, 3]]
-    end
+    before(:each) { @product_ids_and_quantities = [[product_1.id, 2], [product_2.id, 3]] }
 
     it 'builds 2 placements for the order' do
       expect{order.build_placements_with_product_ids_and_quantities(@product_ids_and_quantities)}.to change{order.placements.size}.from(0).to(2)
