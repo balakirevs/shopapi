@@ -7,13 +7,12 @@ describe ApiConstraints do
   describe 'matches?' do
 
     it "returns true when the version matches the 'Accept' header" do
-      request = double(host: 'api.shop_api.dev',
-                       headers: {'Accept' => 'application/vnd.shop_api.v1'})
+      request = double(host: 'api.shopapi.dev', headers: {'Accept' => 'application/vnd.shopapi.v1'})
       expect(api_constraints_v1.matches?(request)).to be_truthy
     end
 
     it "returns the default version when 'default' option is specified" do
-      request = double(host: 'api.shop_api.dev')
+      request = double(host: 'api.shopapi.dev')
       expect(api_constraints_v2.matches?(request)).to be_truthy
     end
   end
