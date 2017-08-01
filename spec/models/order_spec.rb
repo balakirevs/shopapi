@@ -3,6 +3,13 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   subject { build(:order) }
 
+  describe 'db' do
+    context 'columns' do
+      it { is_expected.to have_db_column(:total).of_type(:decimal) }
+      it { is_expected.to have_db_column(:user_id).of_type(:integer) }
+    end
+  end
+
   describe 'respond' do
     it { should respond_to(:total) }
     it { should respond_to(:user_id) }
@@ -31,7 +38,7 @@ RSpec.describe Order, type: :model do
     end
 
     it 'returns the total amount to pay for the products' do
-      expect{order.set_total!}.to change{order.total.to_f}.from(0).to(1575)
+      expect { order.set_total! }.to change { order.total.to_f }.from(0).to(1575)
     end
   end
 
@@ -43,7 +50,7 @@ RSpec.describe Order, type: :model do
     before(:each) { @product_ids_and_quantities = [[product_1.id, 2], [product_2.id, 3]] }
 
     it 'builds 2 placements for the order' do
-      expect{order.build_placements_with_product_ids_and_quantities(@product_ids_and_quantities)}.to change{order.placements.size}.from(0).to(2)
+      expect { order.build_placements_with_product_ids_and_quantities(@product_ids_and_quantities) }.to change { order.placements.size }.from(0).to(2)
     end
   end
 

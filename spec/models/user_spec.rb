@@ -4,6 +4,13 @@ RSpec.describe User, type: :model do
   let(:user) { create(:user) }
   subject { user }
 
+  describe 'db' do
+    context 'columns' do
+      it { is_expected.to have_db_column(:email).of_type(:string) }
+      it { is_expected.to have_db_column(:auth_token).of_type(:string) }
+    end
+  end
+
   describe 'respond' do
     it { should respond_to(:email) }
     it { should respond_to(:password) }

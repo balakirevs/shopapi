@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-
   describe Product do
     let!(:product_1) { create(:product, title: 'A plasma TV', price: 100) }
     let!(:product_2) { create(:product, title: 'Fastest Laptop', price: 50) }
@@ -9,6 +8,16 @@ RSpec.describe Product, type: :model do
     let!(:product_4) { create(:product, title: 'LCD TV', price: 99) }
 
     subject { create(:product) }
+
+    describe 'db' do
+      context 'columns' do
+        it { is_expected.to have_db_column(:title).of_type(:string) }
+        it { is_expected.to have_db_column(:price).of_type(:decimal) }
+        it { is_expected.to have_db_column(:published).of_type(:boolean) }
+        it { is_expected.to have_db_column(:user_id).of_type(:integer) }
+        it { is_expected.to have_db_column(:quantity).of_type(:integer) }
+      end
+    end
 
     describe 'respond' do
       it { should respond_to(:title) }
@@ -99,7 +108,7 @@ RSpec.describe Product, type: :model do
 
       context 'when product_ids is present' do
         it 'returns the product from the ids' do
-          search_hash = { product_ids: [product_1.id, product_2.id]}
+          search_hash = { product_ids: [product_1.id, product_2.id] }
           expect(Product.search(search_hash)).to match_array([product_1, product_2])
         end
       end
