@@ -19,6 +19,11 @@ RSpec.describe Placement, type: :model do
     it { should respond_to :quantity }
   end
 
+  describe 'validation' do
+    it { is_expected.to validate_presence_of(:order) }
+    it { is_expected.to validate_presence_of(:product) }
+  end
+
   describe 'relation' do
     it { should belong_to :order }
     it { should belong_to :product }
